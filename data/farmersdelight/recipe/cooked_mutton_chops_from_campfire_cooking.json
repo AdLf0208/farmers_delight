@@ -1,0 +1,11 @@
+{
+  "category": "food",
+  "cookingtime": 600,
+  "experience": 0.35,
+  "ingredient": "farmersdelight:mutton_chops",
+  "result": {
+    "count": 1,
+    "id": "farmersdelight:cooked_mutton_chops"
+  },
+  "type": "minecraft:campfire_cooking"
+}

@@ -1,0 +1,18 @@
+{
+  "components": {
+    "!minecraft:compostable": {},
+    "minecraft:consumable": {
+      "animation": "drink",
+      "sound": "minecraft:entity.generic.drink"
+    },
+    "minecraft:food": {
+      "nutrition": 8,
+      "saturation": 11.2
+    },
+    "minecraft:use_remainder": {
+      "id": "minecraft:bowl"
+    }
+  },
+  "max_stack_size": 16,
+  "template": "minecraft:apple"
+}

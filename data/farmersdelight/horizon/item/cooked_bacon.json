@@ -1,0 +1,13 @@
+{
+  "components": {
+    "!minecraft:compostable": {},
+    "minecraft:consumable": {
+      "consume_seconds": 0.8
+    },
+    "minecraft:food": {
+      "nutrition": 4,
+      "saturation": 6.4
+    }
+  },
+  "template": "minecraft:apple"
+}

@@ -1,0 +1,25 @@
+{
+  "components": {
+    "!minecraft:compostable": {},
+    "minecraft:consumable": {
+      "on_consume_effects": [
+        {
+          "effects": [
+            {
+              "amplifier": 0,
+              "duration": 600,
+              "id": "minecraft:hunger"
+            }
+          ],
+          "probability": 0.3,
+          "type": "minecraft:apply_effects"
+        }
+      ]
+    },
+    "minecraft:food": {
+      "nutrition": 2,
+      "saturation": 1.2
+    }
+  },
+  "template": "minecraft:apple"
+}

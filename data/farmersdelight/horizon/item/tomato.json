@@ -1,0 +1,10 @@
+{
+  "components": {
+    "!minecraft:compostable": {},
+    "minecraft:food": {
+      "nutrition": 1,
+      "saturation": 0.6
+    }
+  },
+  "template": "minecraft:apple"
+}

@@ -1,0 +1,37 @@
+# Farmer's Delight for Horizon — one flat SDK package (mod API 0.2).
+#
+# Migrated 2026-11-18 from the retired `.hnmod` container (Horizon's mod-API merge
+# #16941, launcher >= 0.2.70). The registry closed this port's former submission
+# **#817** with the format purge, so version 0.2.0 supersedes it. This manifest is
+# the only one: identity, the content capability and the exact native pins.
+#
+# `assets/` and `data/` are the carried content (77 food items, 45 recipes, 21 `c:`
+# tags, one creative tab, two crop blocks with their states/models/loot), `src/` is
+# the port's code (the seed click and the `/fdcrop` readout over the same content).
+# Both halves travel in one file, which is the point of the SDK layout.
+#
+# Farmer's Delight is MIT (its `LICENSE`, "Copyright (c) 2020 vectorwing"). Rank 0,
+# permissive; `LICENSE` and `LICENSE-NOTICE.md` travel inside the package. Local-only
+# until the maintainer approves publishing (ARCHITECTURE.md §8).
+id = "farmersdelight"
+name = "Farmer's Delight"
+version = "0.2.0"
+description = """A port of Farmer's Delight for Horizon: the 77 foods with their nutrition, absolute
+saturation, stack size, eating time, bowl/bottle remainder and vanilla effects; the two crops
+(cabbages and budding tomatoes) that grow on hydrated farmland, planted by using their seed on
+top of it; 45 crafting/smelting/smoking/campfire recipes, the `c:` item tags they need, and one
+creative tab. The cutting board, cooking pot, skillet, feasts, the tomato vine and the mod's
+own `nourishment` effect are not ported yet."""
+authors = ["vectorwing", "AdLf0208"]
+# The content API: exact and checked. This package ships carried content beside its
+# code, so the capability is a real claim and also the one value the schema has.
+api = "0.2"
+# The installation side, not the hook's: an integrated server belongs to the client
+# installation, so a LAN host or a single-player world needs both.
+side = "both"
+capabilities = ["registries"]
+
+[native]
+game = "26.3"
+horizon = "0b14f8acfd97fa2c750e42795249dcc981178ca4"
+mixins = "e59da9094f0c2fdda6c627fe9eff22dec6a906f0"

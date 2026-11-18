@@ -1,0 +1,29 @@
+{
+  "components": {
+    "!minecraft:compostable": {},
+    "minecraft:consumable": {
+      "on_consume_effects": [
+        {
+          "effects": [
+            {
+              "amplifier": 0,
+              "duration": 240,
+              "id": "minecraft:nausea"
+            }
+          ],
+          "probability": 0.3,
+          "type": "minecraft:apply_effects"
+        }
+      ]
+    },
+    "minecraft:food": {
+      "nutrition": 5,
+      "saturation": 4.0
+    },
+    "minecraft:use_remainder": {
+      "id": "minecraft:bowl"
+    }
+  },
+  "max_stack_size": 16,
+  "template": "minecraft:apple"
+}

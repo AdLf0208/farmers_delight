@@ -1,0 +1,14 @@
+{
+  "components": {
+    "!minecraft:compostable": {},
+    "minecraft:food": {
+      "nutrition": 12,
+      "saturation": 19.2
+    },
+    "minecraft:use_remainder": {
+      "id": "minecraft:bowl"
+    }
+  },
+  "max_stack_size": 16,
+  "template": "minecraft:apple"
+}
