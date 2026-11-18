@@ -1,13 +1,19 @@
-# Farmer's Delight (Horizon port)
+# Farmer's Delight — a Horizon port
 
-A Horizon port of [Farmer's Delight](https://github.com/vectorwing/FarmersDelight)
-by vectorwing — MIT.
+**Farmer's Delight** is a Minecraft mod. A cozy expansion to farming and cooking in Minecraft. This repository is a **port of it to [Horizon](https://github.com/horizon-rust/horizon)**, the Rust engine for Minecraft Java 26.3. It carries the complete source of the port plus the content files it ships, and installs as a single `.hmod` package.
 
-**Status: slice 2.** What is below is what the port actually does today; the rest
-of the mod is the gap list at the end. One file, `farmersdelight.hmod`, carries
-both the content and the code (Horizon mod API `0.2`).
+Upstream: [vectorwing/FarmersDelight](https://github.com/vectorwing/FarmersDelight) — licence **MIT**.
 
-## What works
+| | |
+|---|---|
+| Upstream mod | Farmer's Delight ([source](https://github.com/vectorwing/FarmersDelight)) |
+| Ported to | Horizon 0b14f8a, Minecraft Java 26.3, mod API `0.2` |
+| Package | `farmersdelight.hmod` (install it with the Horizon launcher) |
+| Licence | **MIT** — the upstream mod's licence; see [Licence and credit](#licence-and-credit) |
+
+## What this port implements
+
+### What works
 
 - **77 foods** with their nutrition, absolute saturation, stack size, eating time
   and bowl/glass-bottle remainder: raw crops, foodstuffs, sweets, handheld meals,
@@ -23,55 +29,45 @@ both the content and the code (Horizon mod API `0.2`).
 
 ## Not yet ported
 
-- The **cutting board, cooking pot and skillet**, and every
-  `farmersdelight:cutting` and `farmersdelight:cooking` recipe, so the foods whose
-  only source is a knife or a pot are not survival-obtainable yet.
-- The **tomato vine**: a mature budding bush stays at its last age instead of
-  becoming a `tomatoes` vine with rope and hanging tomatoes.
-- The onion and rice crops, the wild crops, rich soil and farmland, the feast
-  blocks and placeable pies, the mod's own `nourishment` effect, the non-food
-  drinks, dog-food feeding and horse feed, compost values and tooltips.
+- **Crop blocks and seeds**: cabbage/tomato/onion crops, wild crops, rice and
+- **Cutting board, cooking pot, skillet and their recipe types**: all
+- **Feast blocks** (roast chicken block, stuffed pumpkin block, …) and the
+- **`nourishment`**: the custom effect is not registered (see above).
+- **Non-food drinks**: milk bottle, hot cocoa and melon juice have no
+- **Interactions**: dog food feeding wolves and horse feed are deferred (they
+- **Compost values, recipe advancements, tooltips and client effect tooltips**
+- **Not exercised in-game**: the vanilla consume effects, the bowl/bottle
 
-The package also registers one diagnostic command, `/fdcrop setage <x> <y> <z>
-<age>`, which writes an age into this mod's own crop blocks and nothing else; it
-exists for the port's in-game test and is not an upstream feature.
+## Installing
 
-## Install
+1. Install the [Horizon launcher](https://github.com/horizon-rust/horizon/releases) (0.2.70 or newer).
+2. Add `farmersdelight.hmod` to the instance's mods.
+3. The package is pinned to a specific Horizon build; the launcher checks that pin.
 
-Pick `farmersdelight.hmod` in the launcher's mod browser or drop it into the
-instance's mod folder. One file installs the items, the crops and the code; the
-launcher compiles `src/` against the pinned game build.
+## Licence and credit
 
-## Build from source
+Farmer's Delight was created by its upstream authors; the code, models and assets in the original mod
+remain theirs and are used here under **MIT**. The Rust in this repository is a clean-room
+rewrite for Horizon, not a translation of the original source.
 
-```sh
-cargo test                 # the pure contract in src/runtime.rs
-cargo clippy --all-targets -- -D warnings
-cargo fmt --check          # not --all: .horizon/sdk is a path dependency
-cargo horizon-mod build    # -> target/horizon-mod/farmersdelight.hmod
-cargo horizon-mod check farmersdelight.hmod
-cargo horizon-mod fits farmersdelight.hmod --build nightly
+- `LICENSE` — the upstream licence text.
+- `LICENSE-NOTICE.md` — what this port carries and where it came from.
+- The upstream project: https://github.com/vectorwing/FarmersDelight
+
+## Technical details
+
+```
+horizon-mod.toml   package manifest (id, version, api, [native] pin)
+Cargo.toml         the crate; depends on `horizon-mod-api` from the fetched SDK
+src/               lib.rs (the one `impl Hooks`), runtime.rs (pure logic + tests), glue
+assets/ data/      the content the package ships
+tools/             content generators and the e2e scenario
 ```
 
-`.horizon/sdk/` is fetched by any `cargo horizon-mod` command and is never
-packed; `Cargo.lock` is not packed either (remove it before a release build).
+- Build: `cargo horizon-mod build` (packages; it does not compile against the game).
+- Test: `cargo test`, `cargo clippy --all-targets -- -D warnings`.
+- In-game: `ports/tools/launcher-game.sh run farmersdelight` in the campaign tree, or install the
+  `.hmod` and play; the harness scenario is `tools/e2e.sh`.
 
-## Compatibility
-
-Mod API `0.2`; the native half is pinned in `horizon-mod.toml` to game `26.3`,
-Horizon SDK build `0b14f8acfd97fa2c750e42795249dcc981178ca4` and mixins
-`e59da9094f0c2fdda6c627fe9eff22dec6a906f0`.
-
-## Credits and licence
-
-Original mod: [vectorwing/FarmersDelight](https://github.com/vectorwing/FarmersDelight)
-(MIT, Copyright (c) 2020 vectorwing). Port: AdLf0208. Licence: MIT — see
-[LICENSE](LICENSE); the original notices are preserved and traced in
-[LICENSE-NOTICE.md](LICENSE-NOTICE.md).
-
-The port writes no gamerule or other world setting. As with any content mod, its
-blocks and items stay in an existing save if the mod is removed.
-
-## Contributing
-
-The gap list above is the work left. Issues and pull requests are welcome.
+This repository is generated from the campaign's port at `ports/farmersdelight/`; the port's own
+`notes.md` is the full record (decisions, traps, evidence).
